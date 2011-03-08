@@ -1,0 +1,3 @@
+module BlacklightFacetExtras::Tag
+
+end

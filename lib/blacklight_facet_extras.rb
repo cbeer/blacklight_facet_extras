@@ -31,6 +31,22 @@ module BlacklightFacetExtras
       
       end
 
+      if Blacklight.config[:facet][:tag]
+      unless omit_inject[:view_helpers]
+        CatalogController.add_template_helper(
+          BlacklightFacetExtras::Tag::ViewHelperOverride
+        ) unless
+         CatalogController.master_helper_module.include?( 
+            BlacklightFacetExtras::Tag::ViewHelperOverride
+         )
+      end
+
+      unless omit_inject[:controller_mixin]
+        CatalogController.send(:include, BlacklightFacetExtras::Tag::ControllerOverride) unless CatalogController.include?(BlacklightFacetExtras::Tag::ControllerOverride)
+      end
+
+      end
+
       CatalogController.before_filter do |controller|
         
         unless omit_inject[:css]
