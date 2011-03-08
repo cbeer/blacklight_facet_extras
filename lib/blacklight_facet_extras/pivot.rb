@@ -1,0 +1,3 @@
+module BlacklightFacetExtras::Pivot
+
+end

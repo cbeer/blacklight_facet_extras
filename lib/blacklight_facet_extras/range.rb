@@ -1,0 +1,3 @@
+module BlacklightFacetExtras::Range
+
+end
