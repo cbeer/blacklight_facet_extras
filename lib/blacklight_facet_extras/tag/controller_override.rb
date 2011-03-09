@@ -14,11 +14,12 @@ module BlacklightFacetExtras::Tag::ControllerOverride
 
 
       values = []
-      solr_params[:fq].select { |x| x.starts_with?("{!raw f=#{k}}") }.each do |x|
-        values << solr_params[:fq].delete(x)
-      end if solr_params[:fq]
-
-      solr_params[:fq] << "{!tag=#{config[:ex]}} #{values.map { |x| "_query_:\"#{x}\""}.join(" OR ") }"if solr_params[:fq]
+      if solr_params[:fq]
+        solr_params[:fq].select { |x| x.starts_with?("{!raw f=#{k}}") }.each do |x|
+          values << solr_params[:fq].delete(x)
+        end 
+        solr_params[:fq] << "{!tag=#{config[:ex]}} #{values.map { |x| "_query_:\"#{x}\""}.join(" OR ") }" unless values.empty?
+      end
 
       solr_params[:"facet.field"].each_with_index.select { |value, index| value == k }.each do |value, index|
         solr_params[:"facet.field"][index] = "{!ex=#{config[:ex]}}#{value}"
