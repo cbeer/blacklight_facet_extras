@@ -47,6 +47,22 @@ module BlacklightFacetExtras
 
       end
 
+      if Blacklight.config[:facet][:query]
+      unless omit_inject[:view_helpers]
+        CatalogController.add_template_helper(
+          BlacklightFacetExtras::Query::ViewHelperOverride
+        ) unless
+         CatalogController.master_helper_module.include?( 
+            BlacklightFacetExtras::Query::ViewHelperOverride
+         )
+      end
+
+      unless omit_inject[:controller_mixin]
+        CatalogController.send(:include, BlacklightFacetExtras::Query::ControllerOverride) unless CatalogController.include?(BlacklightFacetExtras::Query::ControllerOverride)
+      end
+
+      end
+
       CatalogController.before_filter do |controller|
         
         unless omit_inject[:css]
