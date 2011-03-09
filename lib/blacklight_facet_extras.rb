@@ -63,6 +63,22 @@ module BlacklightFacetExtras
 
       end
 
+      if Blacklight.config[:facet][:pivot]
+      unless omit_inject[:view_helpers]
+        CatalogController.add_template_helper(
+          BlacklightFacetExtras::Pivot::ViewHelperOverride
+        ) unless
+         CatalogController.master_helper_module.include?( 
+            BlacklightFacetExtras::Pivot::ViewHelperOverride
+         )
+      end
+
+      unless omit_inject[:controller_mixin]
+        CatalogController.send(:include, BlacklightFacetExtras::Pivot::ControllerOverride) unless CatalogController.include?(BlacklightFacetExtras::Pivot::ControllerOverride)
+      end
+
+      end
+
       CatalogController.before_filter do |controller|
         
         unless omit_inject[:css]
