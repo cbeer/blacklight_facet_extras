@@ -32,7 +32,8 @@ config[:facets] = {
    :field_names => [
      "format",
      "dc_date_year_i",
-     "timestamp_query"
+     "timestamp_query",
+     "author"
    ],
    :labels => {
      "format" => "display_partial",
@@ -56,6 +57,9 @@ config[:facets] = {
        'this week' => 'timestamp:[NOW-7DAY TO *]'
        'this week' => 'timestamp:[NOW-1MONTH TO *]'
      }
+   },
+   :pivot => {
+     "author" => ["author", "title"]
    }
 }
 
