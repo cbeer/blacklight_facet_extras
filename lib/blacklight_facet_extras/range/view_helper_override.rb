@@ -10,7 +10,7 @@ module BlacklightFacetExtras::Range::ViewHelperOverride
     end
     def solr_range_to_a(solr_field)
       config = facet_range_config(solr_field)
-      return [] unless config and @response and @response["facet_counts"] and @response["facet_counts"]["facet_ranges"] and @response["facet_counts"]["facet_ranges"][solr_field]
+      return RSolr::Ext::Response::Facets::FacetField.new(solr_field,[]) unless config and @response and @response["facet_counts"] and @response["facet_counts"]["facet_ranges"] and @response["facet_counts"]["facet_ranges"][solr_field]
 
       data = @response["facet_counts"]["facet_ranges"][solr_field]
 
