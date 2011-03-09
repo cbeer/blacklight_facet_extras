@@ -1,21 +1,5 @@
 module BlacklightFacetExtras::Range::ViewHelperOverride
 
-  class FacetItem <  RSolr::Ext::Response::Facets::FacetItem
-    attr_accessor :display_label
-    attr_accessor :from, :to
-
-    def initialize value, hits, opts = {}
-      super(value, hits)
-      @display_label = value
-      @from = opts[:from]
-      @to = opts[:to]
-    end
-
-    def value
-      return"[#{self.from} TO #{self.to}]" if self.from and self.to
-      super
-    end
-  end
     def render_facet_limit(solr_field)
       config = facet_range_config(solr_field)
       if ( config )
@@ -35,7 +19,7 @@ module BlacklightFacetExtras::Range::ViewHelperOverride
       arr << FacetItem.new("before", data[:before], :from => '*', :to => data[:start]) if data[:before] > 0
 
       last = 0
-      range = data[:counts].each_slice(2).map { |value, hits| FacetItem.new(value,hits) }
+      range = data[:counts].each_slice(2).map { |value, hits| BlacklightFacetExtras::Range::FacetItem.new(value,hits) }
 
       if range.length > 1
       
@@ -54,7 +38,7 @@ module BlacklightFacetExtras::Range::ViewHelperOverride
     end
 
     def render_facet_value(facet_solr_field, item, options ={})
-      if item.is_a? BlacklightFacetExtras::Range::ViewHelperOverride::FacetItem
+      if item.is_a? BlacklightFacetExtras::Range::FacetItem
         (link_to_unless(options[:suppress_link], item.display_label || item.value , add_facet_params_and_redirect(facet_solr_field, item.value), :class=>"facet_select label") + " " + render_facet_count(item.hits)).html_safe
       else
         super(facet_solr_field, item, options ={})

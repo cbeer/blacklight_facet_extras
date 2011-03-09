@@ -15,7 +15,7 @@
                 :limit => facet_limit_for(solr_field))
           %>
 
-          <% params[:f][solr_field].select { |x| x =~ /\[(\d+) TO (\d+)\]/ }.map { |x| r = x.scan(/\[(\d+) TO (\d+)\]/).first; BlacklightFacetExtras::Range::ViewHelperOverride::FacetItem.new("#{r.first} - #{r.last}", @response.total, { :from => r.first, :to => r.last}) }.each do |item| -%>
+          <% params[:f][solr_field].select { |x| x =~ /\[(\d+) TO (\d+)\]/ }.map { |x| r = x.scan(/\[(\d+) TO (\d+)\]/).first; BlacklightFacetExtras::Range::FacetItem.new("#{r.first} - #{r.last}", @response.total, { :from => r.first, :to => r.last}) }.each do |item| -%>
             <li>
               <%= render_selected_facet_value(solr_field, item) %>
             </li>
