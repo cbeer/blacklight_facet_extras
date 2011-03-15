@@ -17,6 +17,7 @@ module BlacklightFacetExtras::Range::ControllerOverride
       solr_params["f.#{k}.facet.range.start"] = config[:start]
       solr_params["f.#{k}.facet.range.end"] = config[:end]
       solr_params["f.#{k}.facet.range.gap"] = config[:gap]
+      solr_params["f.#{k}.facet.mincount"] = config[:mincount] if config[:mincount]
 
       solr_params[:fq].select { |x| x.starts_with?("{!raw f=#{k}}") }.each do |x|
         v = solr_params[:fq].delete x
