@@ -5,20 +5,20 @@
 module BlacklightFacetExtras::Pivot::ControllerOverride
   def self.included(some_class)
     some_class.helper_method :facet_pivot_config
+    some_class.solr_search_params_logic << :add_pivot_facets_to_solr
   end
-  def solr_search_params(extra_params)
-    solr_params = super(extra_params)
+  def add_pivot_facets_to_solr(solr_parameters, user_parameters)
 
     blacklight_pivot_config.each do |k, config|
-      solr_params[:"facet.field"].select { |x| x == k }.each do |x|
-        solr_params[:"facet.field"].delete x
-      end if solr_params[:"facet.field"]
+      solr_parameters[:"facet.field"].select { |x| x == k }.each do |x|
+        solr_parameters[:"facet.field"].delete x
+      end if solr_parameters[:"facet.field"]
 
-      solr_params[:"facet.pivot"] ||= []
-      solr_params[:"facet.pivot"] << config.join(",")
+      solr_parameters[:"facet.pivot"] ||= []
+      solr_parameters[:"facet.pivot"] << config.join(",")
     end
 
-    solr_params
+    solr_parameters
   end
 
     def facet_pivot_config(solr_field)

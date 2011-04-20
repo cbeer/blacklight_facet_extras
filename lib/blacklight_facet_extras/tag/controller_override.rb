@@ -4,29 +4,27 @@
 # to solr parameters creation. 
 module BlacklightFacetExtras::Tag::ControllerOverride
   def self.included(some_class)
+    some_class.solr_search_params_logic << :add_tag_facets_to_solr
     some_class.helper_method :facet_tag_config
   end
-  def solr_search_params(extra_params)
-    solr_params = super(extra_params)
-
-
+  def add_tag_facets_to_solr(solr_parameters, user_parameters)
     blacklight_tag_config.each do |k, config|
 
 
       values = []
-      if solr_params[:fq]
-        solr_params[:fq].select { |x| x.starts_with?("{!raw f=#{k}}") }.each do |x|
-          values << solr_params[:fq].delete(x)
+      if solr_parameters[:fq]
+        solr_parameters[:fq].select { |x| x.starts_with?("{!raw f=#{k}}") }.each do |x|
+          values << solr_parameters[:fq].delete(x)
         end 
-        solr_params[:fq] << "{!tag=#{config[:ex]}} #{values.map { |x| "_query_:\"#{x}\""}.join(" OR ") }" unless values.empty?
+        solr_parameters[:fq] << "{!tag=#{config[:ex]}} #{values.map { |x| "_query_:\"#{x}\""}.join(" OR ") }" unless values.empty?
       end
 
-      solr_params[:"facet.field"].each_with_index.select { |value, index| value == k }.each do |value, index|
-        solr_params[:"facet.field"][index] = "{!ex=#{config[:ex]}}#{value}"
-      end if solr_params[:"facet.field"]
+      solr_parameters[:"facet.field"].each_with_index.select { |value, index| value == k }.each do |value, index|
+        solr_parameters[:"facet.field"][index] = "{!ex=#{config[:ex]}}#{value}"
+      end if solr_parameters[:"facet.field"]
     end
 
-    solr_params
+    solr_parameters
   end
 
     def facet_tag_config(solr_field)

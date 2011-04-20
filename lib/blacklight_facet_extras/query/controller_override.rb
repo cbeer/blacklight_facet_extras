@@ -4,29 +4,27 @@
 # to solr parameters creation. 
 module BlacklightFacetExtras::Query::ControllerOverride
   def self.included(some_class)
+    some_class.solr_search_params_logic << :add_query_facets_to_solr
     some_class.helper_method :facet_query_config
   end
-  def solr_search_params(extra_params)
-    solr_params = super(extra_params)
-
+  def add_query_facets_to_solr(solr_parameters, user_parameters)
     blacklight_query_config.each do |k, config|
-      solr_params[:fq].select { |x| x.starts_with?("{!raw f=#{k}}") }.each do |x|
-        v = solr_params[:fq].delete x
+      solr_parameters[:fq].select { |x| x.starts_with?("{!raw f=#{k}}") }.each do |x|
+        v = solr_parameters[:fq].delete x
+        value = v.gsub("{!raw f=#{k}}", "")
+        value = config[value] if config[value]                  
+        solr_parameters[:fq] << value
+      end if solr_parameters[:fq]
 
-        solr_params[:fq] << v.gsub("{!raw f=#{k}}", "")
-      end if solr_params[:fq]
+      solr_parameters[:"facet.field"].select { |x| x == k }.each do |x|
+        solr_parameters[:"facet.field"].delete x
+      end if solr_parameters[:"facet.field"]
 
-      solr_params[:"facet.field"].select { |x| x == k }.each do |x|
-        solr_params[:"facet.field"].delete x
-      end if solr_params[:"facet.field"]
-
-      solr_params[:"facet.query"] ||= []
+      solr_parameters[:"facet.query"] ||= []
       config.each do |label, query|
-        solr_params[:"facet.query"] << query
+        solr_parameters[:"facet.query"] << query
       end
     end
-
-    solr_params
   end
 
     def facet_query_config(solr_field)

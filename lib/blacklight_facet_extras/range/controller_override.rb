@@ -4,29 +4,28 @@
 # to solr parameters creation. 
 module BlacklightFacetExtras::Range::ControllerOverride
   def self.included(some_class)
+    some_class.solr_search_params_logic << :add_range_facets_to_solr
     some_class.helper_method :facet_range_config
   end
-  def solr_search_params(extra_params)
-    solr_params = super(extra_params)
-
-
-
-    solr_params['facet.range.other'] = 'all'
+  def add_range_facets_to_solr(solr_parameters, user_parameters)
+    solr_parameters['facet.range.other'] = 'all'
     blacklight_range_config.each do |k, config|
-      solr_params['facet.range'] = k
-      solr_params["f.#{k}.facet.range.start"] = config[:start]
-      solr_params["f.#{k}.facet.range.end"] = config[:end]
-      solr_params["f.#{k}.facet.range.gap"] = config[:gap]
-      solr_params["f.#{k}.facet.mincount"] = config[:mincount] if config[:mincount]
+      solr_parameters['facet.range'] = k
 
-      solr_params[:fq].select { |x| x.starts_with?("{!raw f=#{k}}") }.each do |x|
-        v = solr_params[:fq].delete x
+      fq = solr_parameters[:fq].select { |x| x.starts_with?("{!raw f=#{k}}") and x =~ /\[.* TO .*\]/ }.map { |x| solr_parameters[:fq].delete(x) }.map { |x| x.gsub("{!raw f=#{k}}", "") }.map { |x| x.scan(/\[(.*) TO (.*)\]/).first }
 
-        solr_params[:fq] << v.gsub("{!raw f=#{k}}", "#{k}:")
-      end if solr_params[:fq]
+      range_start = fq.map { |x| x.first }.max
+      range_end = fq.map { |x| x.last }.min
+      range_gap = ((range_end.to_i - range_start.to_i) / (facet_limit_for(k) || 10)) if range_start and range_end
+
+
+      solr_parameters["f.#{k}.facet.range.start"] = range_start || config[:start]
+      solr_parameters["f.#{k}.facet.range.end"] = range_end || config[:end]
+      solr_parameters["f.#{k}.facet.range.gap"] = range_gap || config[:gap]
+      solr_parameters["f.#{k}.facet.mincount"] = config[:mincount] if config[:mincount]
+
+      solr_parameters[:fq] << "#{k}:[#{range_start} TO #{range_end}]" if range_start and range_end
     end
-
-    solr_params
   end
 
     def facet_range_config(solr_field)
