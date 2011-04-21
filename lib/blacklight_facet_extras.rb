@@ -13,6 +13,14 @@ module BlacklightFacetExtras
       unless omit_inject[:controller_mixin]
         CatalogController.send(:include, BlacklightFacetExtras::ControllerOverride) unless CatalogController.include?(BlacklightFacetExtras::ControllerOverride)
       end
+      unless omit_inject[:view_helpers]
+        CatalogController.add_template_helper(
+          BlacklightFacetExtras::ViewHelperOverride
+        ) unless
+         CatalogController.master_helper_module.include?( 
+            BlacklightFacetExtras::ViewHelperOverride
+         )
+      end
 
       if Blacklight.config[:facet][:rangex]
       
@@ -75,6 +83,22 @@ module BlacklightFacetExtras
 
       unless omit_inject[:controller_mixin]
         CatalogController.send(:include, BlacklightFacetExtras::Pivot::ControllerOverride) unless CatalogController.include?(BlacklightFacetExtras::Pivot::ControllerOverride)
+      end
+
+      end
+
+      if Blacklight.config[:facet][:filter]
+      unless omit_inject[:view_helpers]
+        CatalogController.add_template_helper(
+          BlacklightFacetExtras::Filter::ViewHelperOverride
+        ) unless
+         CatalogController.master_helper_module.include?( 
+            BlacklightFacetExtras::Filter::ViewHelperOverride
+         )
+      end
+
+      unless omit_inject[:controller_mixin]
+        CatalogController.send(:include, BlacklightFacetExtras::Filter::ControllerOverride) unless CatalogController.include?(BlacklightFacetExtras::Filter::ControllerOverride)
       end
 
       end
