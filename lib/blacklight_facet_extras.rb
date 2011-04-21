@@ -103,6 +103,21 @@ module BlacklightFacetExtras
 
       end
 
+      if Blacklight.config[:facet][:hierarchy]
+      unless omit_inject[:view_helpers]
+        CatalogController.add_template_helper(
+          BlacklightFacetExtras::Hierarchy::ViewHelperOverride
+        ) unless
+         CatalogController.master_helper_module.include?( 
+            BlacklightFacetExtras::Hierarchy::ViewHelperOverride
+         )
+      end
+
+      unless omit_inject[:controller_mixin]
+        CatalogController.send(:include, BlacklightFacetExtras::Hierarchy::ControllerOverride) unless CatalogController.include?(BlacklightFacetExtras::Hierarchy::ControllerOverride)
+      end
+
+      end
       CatalogController.before_filter do |controller|
         
         unless omit_inject[:css]

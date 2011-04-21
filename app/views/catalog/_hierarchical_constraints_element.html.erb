@@ -1,0 +1,39 @@
+<%- # local params:
+    # label 
+    # value
+    # options =>
+    #   :remove => url for a remove constraint link
+    #   :classes => array of classes to add to container span
+    options ||= {}
+    options[:escape_label] = true unless options.has_key?(:escape_label)
+    options[:escape_value] = true unless options.has_key?(:escape_value)
+-%>
+
+<span class="appliedFilter constraint <%= options[:classes].join(" ") if options[:classes] %>">
+      <%- unless label.blank? -%>
+        <span class="filterName"><%= options[:escape_label] ? h(label) : label %></span> 
+      <%- end -%>
+
+      <% asdf = [] %>
+      <% value.split("/").each do |v| %>
+      <%- unless v.blank? -%>
+        <span class="filterValue"><%= options[:escape_value] ? h(v) : v %></span>
+      <%- end -%>
+      <%- unless options[:remove].blank? -%>
+        <% accessible_remove_label =               
+                if label.blank?
+                  "Remove constraint #{options[:escape_value] ? h(v) : v}"
+                else
+                  "Remove constraint #{options[:escape_value] ? h(v) : v}: #{options[:escape_value] ? h(v) : v}"
+                end              
+        %>                
+        <%= link_to(accessible_remove_label,
+                                                                options[:remove].gsub(/=(#{Regexp.escape(CGI::escape(asdf.join("/")))})[^&]+/, "=#{CGI::escape(asdf.join("/"))}"), # FIXME: Ugh.
+					:class=>'btnRemove imgReplace',
+          :alt=>'remove'
+                   ) %>
+        <% asdf << v %>
+                 <% end %>
+      <%- end -%>
+</span>
+
