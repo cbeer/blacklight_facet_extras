@@ -1,0 +1,3 @@
+module BlacklightFacetExtras::Filter
+
+end

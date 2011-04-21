@@ -60,6 +60,10 @@ config[:facets] = {
    },
    :pivot => {
      "author" => ["author", "title"]
+   },
+   :filter => {
+     "subject" => lambda { |value| value =~ /--/ }, 
+     "date" => lambda { |value| Chronic.parse(value) rescue value }
    }
 }
 
