@@ -11,12 +11,13 @@ module BlacklightFacetExtras::Hierarchy::ControllerOverride
     blacklight_hierarchy_config.each do |k, config|
 
       fq = (solr_parameters[:fq] || []).select { |x| x.starts_with? "{!raw f=#{k}}" }.first.to_s
-      
-      if fq.blank?
+
+      value = fq.gsub("{!raw f=#{k}}", "")
+      solr_parameters[:fq].delete(fq)
+
+      if value.blank?
         solr_parameters[:"f.#{k}.facet.prefix"] ||= "1/" 
       else
-        value = fq.gsub("{!raw f=#{k}}", "")
-        solr_parameters[:fq].delete(fq)
         solr_parameters[:fq] << "{!raw f=#{k}}#{value.count("/") + 1}/#{value}"
         solr_parameters[:"f.#{k}.facet.prefix"] ||= "#{value.count("/") + 2}/#{value}/"
       end

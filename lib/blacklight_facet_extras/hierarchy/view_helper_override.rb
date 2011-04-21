@@ -37,6 +37,7 @@ module BlacklightFacetExtras::Hierarchy::ViewHelperOverride
   def render_constraint_element(label, value, options = {})
     return super(label, value, options) unless options[:classes].any? { |x| blacklight_hierarchy_config.keys.map { |y| "filter-#{y.parameterize}" }.include? x }
 
+    return ''.html_safe if value.blank?
     render(:partial => "catalog/hierarchical_constraints_element", :locals => {:label => label, :value => value, :options => options})
   end
 end
