@@ -36,12 +36,4 @@ module BlacklightFacetExtras::Range::ViewHelperOverride
       arr << BlacklightFacetExtras::Range::FacetItem.new("after", data[:after], :from => data[:end], :to => '*') if data[:after] > 0
       RSolr::Ext::Response::Facets::FacetField.new(solr_field, arr)
     end
-
-    def render_facet_value(facet_solr_field, item, options ={})
-      if item.is_a? BlacklightFacetExtras::Range::FacetItem
-        (link_to_unless(options[:suppress_link], item.display_label || item.value , add_facet_params_and_redirect(facet_solr_field, item.value), :class=>"facet_select label") + " " + render_facet_count(item.hits)).html_safe
-      else
-        super(facet_solr_field, item, options ={})
-      end
-    end
 end

@@ -1,11 +1,9 @@
 module BlacklightFacetExtras::Range
-  class FacetItem <  RSolr::Ext::Response::Facets::FacetItem
-    attr_accessor :display_label
+  class FacetItem <  BlacklightFacetExtras::FacetItem
     attr_accessor :from, :to
 
     def initialize value, hits, opts = {}
-      super(value, hits)
-      @display_label = value
+      super(value, hits, opts = {})
       @from = opts[:from]
       @to = opts[:to]
     end
