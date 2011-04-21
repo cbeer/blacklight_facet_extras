@@ -15,7 +15,7 @@ module BlacklightFacetExtras::Query::ViewHelperOverride
 
       arr = []
       config.each do |display_label, query|
-        next unless @response["facet_counts"]["facet_queries"][query] and @response["facet_counts"]["facet_queries"][query] > 0
+        next unless @response["facet_counts"]["facet_queries"][query] and @response["facet_counts"]["facet_queries"][query] > 0 and  @response["facet_counts"]["facet_queries"][query] < @response.total
         arr <<  RSolr::Ext::Response::Facets::FacetItem.new(display_label,@response["facet_counts"]["facet_queries"][query])
       end
 
