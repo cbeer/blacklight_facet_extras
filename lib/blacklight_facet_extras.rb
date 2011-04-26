@@ -9,15 +9,14 @@ module BlacklightFacetExtras
   def self.omit_inject ; @omit_inject ; end
   
   def self.inject!
-    Dispatcher.to_prepare do
       unless omit_inject[:controller_mixin]
         CatalogController.send(:include, BlacklightFacetExtras::ControllerOverride) unless CatalogController.include?(BlacklightFacetExtras::ControllerOverride)
       end
       unless omit_inject[:view_helpers]
-        CatalogController.add_template_helper(
+        CatalogController.helper(
           BlacklightFacetExtras::ViewHelperOverride
         ) unless
-         CatalogController.master_helper_module.include?( 
+         CatalogController._helpers.include?( 
             BlacklightFacetExtras::ViewHelperOverride
          )
       end
@@ -25,10 +24,10 @@ module BlacklightFacetExtras
       if Blacklight.config[:facet][:rangex]
       
       unless omit_inject[:view_helpers]
-        CatalogController.add_template_helper(
+        CatalogController.helper(
           BlacklightFacetExtras::Range::ViewHelperOverride
         ) unless
-         CatalogController.master_helper_module.include?( 
+         CatalogController._helpers.include?( 
             BlacklightFacetExtras::Range::ViewHelperOverride
          )
       end
@@ -41,10 +40,10 @@ module BlacklightFacetExtras
 
       if Blacklight.config[:facet][:tag]
       unless omit_inject[:view_helpers]
-        CatalogController.add_template_helper(
+        CatalogController.helper(
           BlacklightFacetExtras::Tag::ViewHelperOverride
         ) unless
-         CatalogController.master_helper_module.include?( 
+         CatalogController._helpers.include?( 
             BlacklightFacetExtras::Tag::ViewHelperOverride
          )
       end
@@ -57,10 +56,10 @@ module BlacklightFacetExtras
 
       if Blacklight.config[:facet][:query]
       unless omit_inject[:view_helpers]
-        CatalogController.add_template_helper(
+        CatalogController.helper(
           BlacklightFacetExtras::Query::ViewHelperOverride
         ) unless
-         CatalogController.master_helper_module.include?( 
+         CatalogController._helpers.include?( 
             BlacklightFacetExtras::Query::ViewHelperOverride
          )
       end
@@ -73,10 +72,10 @@ module BlacklightFacetExtras
 
       if Blacklight.config[:facet][:pivot]
       unless omit_inject[:view_helpers]
-        CatalogController.add_template_helper(
+        CatalogController.helper(
           BlacklightFacetExtras::Pivot::ViewHelperOverride
         ) unless
-         CatalogController.master_helper_module.include?( 
+         CatalogController._helpers.include?( 
             BlacklightFacetExtras::Pivot::ViewHelperOverride
          )
       end
@@ -89,10 +88,10 @@ module BlacklightFacetExtras
 
       if Blacklight.config[:facet][:filter]
       unless omit_inject[:view_helpers]
-        CatalogController.add_template_helper(
+        CatalogController.helper(
           BlacklightFacetExtras::Filter::ViewHelperOverride
         ) unless
-         CatalogController.master_helper_module.include?( 
+         CatalogController._helpers.include?( 
             BlacklightFacetExtras::Filter::ViewHelperOverride
          )
       end
@@ -105,10 +104,10 @@ module BlacklightFacetExtras
 
       if Blacklight.config[:facet][:hierarchy]
       unless omit_inject[:view_helpers]
-        CatalogController.add_template_helper(
+        CatalogController.helper(
           BlacklightFacetExtras::Hierarchy::ViewHelperOverride
         ) unless
-         CatalogController.master_helper_module.include?( 
+         CatalogController._helpers.include?( 
             BlacklightFacetExtras::Hierarchy::ViewHelperOverride
          )
       end
@@ -118,20 +117,6 @@ module BlacklightFacetExtras
       end
 
       end
-      CatalogController.before_filter do |controller|
-        
-        unless omit_inject[:css]
-          safe_arr_add(controller.stylesheet_links ,
-            ["blacklight_facet_extras", {:plugin => "blacklight_facet_extras"}])
-        end
-
-        unless omit_inject[:js]
-          safe_arr_add(controller.javascript_includes,
-                  ["facet_extras_slider", {:plugin => "blacklight_facet_extras"}])
-        end
-      
-      end  
-    end
   end
 
   # Add element to array only if it's not already there
