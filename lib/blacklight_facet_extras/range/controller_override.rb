@@ -12,6 +12,7 @@ module BlacklightFacetExtras::Range::ControllerOverride
     blacklight_range_config.each do |k, config|
       solr_parameters['facet.range'] = k
 
+      solr_parameters[:fq] ||= []
       fq = solr_parameters[:fq].select { |x| x.starts_with?("{!raw f=#{k}}") and x =~ /\[.* TO .*\]/ }.map { |x| solr_parameters[:fq].delete(x) }.map { |x| x.gsub("{!raw f=#{k}}", "") }.map { |x| x.scan(/\[(.*) TO (.*)\]/).first }
 
       range_start = fq.map { |x| x.first }.max
