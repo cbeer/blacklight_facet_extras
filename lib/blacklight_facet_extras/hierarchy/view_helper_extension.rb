@@ -1,4 +1,13 @@
 module BlacklightFacetExtras::Hierarchy::ViewHelperExtension
+  def render_facet_limit(solr_field)
+    config = facet_hierarchy_config(solr_field)
+    if ( config )
+      render(:partial => "catalog/_facet_partials/hierarchy", :locals=> {:solr_field => solr_field })
+    else
+      super(solr_field)
+    end
+  end
+
   def facet_values_for(solr_field)
     config = facet_hierarchy_config(solr_field)
     facet_field = super(solr_field)
