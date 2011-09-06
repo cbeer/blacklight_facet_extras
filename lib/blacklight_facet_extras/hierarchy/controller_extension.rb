@@ -15,6 +15,7 @@ module BlacklightFacetExtras::Hierarchy::ControllerExtension
       fq = (solr_parameters[:fq] || []).select { |x| x.starts_with? "{!raw f=#{k}}" }.first.to_s
 
       value = fq.gsub("{!raw f=#{k}}", "")
+      solr_parameters[:fq] ||= []
       solr_parameters[:fq].delete(fq)
 
       if value.blank?
