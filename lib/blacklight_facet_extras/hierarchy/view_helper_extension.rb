@@ -35,6 +35,7 @@ module BlacklightFacetExtras::Hierarchy::ViewHelperExtension
   end
 
   def render_constraint_element(label, value, options = {})
+    options[:classes] ||= []
     return super(label, value, options) unless options[:classes].any? { |x| blacklight_hierarchy_config.keys.map { |y| "filter-#{y.parameterize}" }.include? x }
 
     return ''.html_safe if value.blank?
