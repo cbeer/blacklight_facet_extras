@@ -1,4 +1,4 @@
-module BlacklightFacetExtras::Query::ViewHelperOverride
+module BlacklightFacetExtras::Query::ViewHelperExtension
 
     def render_facet_limit(solr_field)
       config = facet_query_config(solr_field)

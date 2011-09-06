@@ -2,10 +2,12 @@
 # Meant to be applied on top of a controller that implements
 # Blacklight::SolrHelper. Will inject range limiting behaviors
 # to solr parameters creation. 
-module BlacklightFacetExtras::Range::ControllerOverride
+module BlacklightFacetExtras::Range::ControllerExtension
   def self.included(some_class)
+    some_class.send :include,BlacklightFacetExtras::ControllerExtension
     some_class.solr_search_params_logic << :add_range_facets_to_solr
     some_class.helper_method :facet_range_config
+    some_class.helper BlacklightFacetExtras::Range::ViewHelperExtension
   end
   def add_range_facets_to_solr(solr_parameters, user_parameters)
     solr_parameters['facet.range.other'] = 'all'

@@ -1,4 +1,4 @@
-module BlacklightFacetExtras::ViewHelperOverride
+module BlacklightFacetExtras::ViewHelperExtension
   def render_facet_value(facet_solr_field, item, options ={})
     if item.respond_to? :display_label
       (link_to_unless(options[:suppress_link], item.display_label || item.value , add_facet_params_and_redirect(facet_solr_field, item.value), :class=>"facet_select label") + " " + render_facet_count(item.hits)).html_safe

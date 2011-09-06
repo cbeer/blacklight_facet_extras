@@ -1,4 +1,4 @@
-module BlacklightFacetExtras::Pivot::ViewHelperOverride
+module BlacklightFacetExtras::Pivot::ViewHelperExtension
 
     def render_facet_limit(solr_field)
       config = facet_pivot_config(solr_field)

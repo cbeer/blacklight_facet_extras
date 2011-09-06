@@ -1,4 +1,6 @@
 module BlacklightFacetExtras::Range
+    autoload :ControllerExtension, 'blacklight_facet_extras/range/controller_extension'
+    autoload :ViewHelperExtension, 'blacklight_facet_extras/range/view_helper_extension'
   class FacetItem <  BlacklightFacetExtras::FacetItem
     attr_accessor :from, :to
 

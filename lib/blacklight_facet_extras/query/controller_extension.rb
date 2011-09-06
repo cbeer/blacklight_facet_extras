@@ -2,10 +2,12 @@
 # Meant to be applied on top of a controller that implements
 # Blacklight::SolrHelper. Will inject query limiting behaviors
 # to solr parameters creation. 
-module BlacklightFacetExtras::Query::ControllerOverride
+module BlacklightFacetExtras::Query::ControllerExtension
   def self.included(some_class)
+    some_class.send :include,BlacklightFacetExtras::ControllerExtension
     some_class.solr_search_params_logic << :add_query_facets_to_solr
     some_class.helper_method :facet_query_config
+    some_class.helper BlacklightFacetExtras::Query::ViewHelperExtension
   end
   def add_query_facets_to_solr(solr_parameters, user_parameters)
     blacklight_query_config.each do |k, config|

@@ -1,4 +1,4 @@
-module BlacklightFacetExtras::Range::ViewHelperOverride
+module BlacklightFacetExtras::Range::ViewHelperExtension
 
     def render_facet_limit(solr_field)
       config = facet_range_config(solr_field)

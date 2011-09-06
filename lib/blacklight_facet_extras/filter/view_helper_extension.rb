@@ -1,4 +1,4 @@
-module BlacklightFacetExtras::Filter::ViewHelperOverride
+module BlacklightFacetExtras::Filter::ViewHelperExtension
   def facet_values_for(solr_field)
     config = facet_filter_config(solr_field)
     facet_field = super(solr_field)

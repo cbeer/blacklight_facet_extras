@@ -2,10 +2,12 @@
 # Meant to be applied on top of a controller that implements
 # Blacklight::SolrHelper. Will inject tag limiting behaviors
 # to solr parameters creation. 
-module BlacklightFacetExtras::Tag::ControllerOverride
+module BlacklightFacetExtras::Tag::ControllerExtension
   def self.included(some_class)
+    some_class.send :include,BlacklightFacetExtras::ControllerExtension
     some_class.solr_search_params_logic << :add_tag_facets_to_solr
     some_class.helper_method :facet_tag_config
+    some_class.helper BlacklightFacetExtras::Tag::ViewHelperExtension
   end
   def add_tag_facets_to_solr(solr_parameters, user_parameters)
     blacklight_tag_config.each do |k, config|
