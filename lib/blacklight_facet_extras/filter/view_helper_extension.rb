@@ -15,4 +15,15 @@ module BlacklightFacetExtras::Filter::ViewHelperExtension
 
     facet_field
   end
+
+  def render_constraint_element(label, value, options = {})
+    options[:classes] ||= []
+    config = blacklight_filter_config.keys.select { |y| options[:classes].include? "filter-#{y.parameterize}" }.first
+    return super(label, value, options) unless config
+
+    display_label = blacklight_filter_config[config].call(value)
+    display_label = value if label === true
+    return ''.html_safe if label.blank?
+    render(:partial => "catalog/filter_constraints_element", :locals => {:label => label, :display_label => display_label, :value => value, :options => options})
+  end
 end
