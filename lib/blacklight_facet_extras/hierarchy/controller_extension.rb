@@ -9,32 +9,27 @@ module BlacklightFacetExtras::Hierarchy::ControllerExtension
     some_class.solr_search_params_logic << :add_hierarchy_facets_to_solr
     some_class.helper BlacklightFacetExtras::Hierarchy::ViewHelperExtension
   end
-  def add_hierarchy_facets_to_solr(solr_parameters, user_parameters)
-    blacklight_hierarchy_config.each do |k, config|
+  def facet_value_to_fq_string(facet_field, value)
+    if blacklight_config.facet_fields[facet_field].hierarchy
+      return "{!raw f=#{facet_field}}#{value.count("/") + 1}/#{value}"
+    end
 
-      fq = (solr_parameters[:fq] || []).select { |x| x.starts_with? "{!raw f=#{k}}" }.first.to_s
+    super
+  end
+  def add_hierarchy_facets_to_solr(solr_parameters, user_params)
+    blacklight_config.facet_fields.select { |key, config| config.hierarchy }.each do |key, config|
+      f_request_params = user_params[:f] || {}
+      value_list = f_request_params[key] || []
 
-      value = fq.gsub("{!raw f=#{k}}", "")
-      solr_parameters[:fq] ||= []
-      solr_parameters[:fq].delete(fq)
-
-      if value.blank?
-        solr_parameters[:"f.#{k}.facet.prefix"] ||= "1/" 
+      if value_list.blank?
+        solr_parameters[:"f.#{key}.facet.prefix"] ||= "1/"
       else
-        solr_parameters[:fq] << "{!raw f=#{k}}#{value.count("/") + 1}/#{value}"
-        solr_parameters[:"f.#{k}.facet.prefix"] ||= "#{value.count("/") + 2}/#{value}/"
+        value_list = [value_list] unless value_list.respond_to? :each
+
+        value_list.each do |value|
+          solr_parameters[:"f.#{key}.facet.prefix"] ||= "#{value.count("/") + 2}/#{value}/"
+        end
       end
     end
-
-    solr_parameters
   end
-    def facet_hierarchy_config(solr_field)
-      config = blacklight_hierarchy_config[solr_field] || false
-      config = {} if config == true
-      config
-    end
-
-    def blacklight_hierarchy_config
-      Blacklight.config[:facet][:hierarchy] || {}
-    end
 end

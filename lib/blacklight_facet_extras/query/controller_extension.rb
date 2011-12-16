@@ -9,33 +9,24 @@ module BlacklightFacetExtras::Query::ControllerExtension
     some_class.helper_method :facet_query_config
     some_class.helper BlacklightFacetExtras::Query::ViewHelperExtension
   end
-  def add_query_facets_to_solr(solr_parameters, user_parameters)
-    blacklight_query_config.each do |k, config|
-      solr_parameters[:fq].select { |x| x.starts_with?("{!raw f=#{k}}") }.each do |x|
-        v = solr_parameters[:fq].delete x
-        value = v.gsub("{!raw f=#{k}}", "")
-        value = config[value] if config[value]                  
-        solr_parameters[:fq] << value
-      end if solr_parameters[:fq]
 
-      solr_parameters[:"facet.field"].select { |x| x == k }.each do |x|
-        solr_parameters[:"facet.field"].delete x
-      end if solr_parameters[:"facet.field"]
+  def facet_value_to_fq_string(facet_field, value)
+    if config = blacklight_config.facet_fields[facet_field].query
+     return config[value]
+    end
+
+    super
+  end
+
+  def add_query_facets_to_solr(solr_parameters, user_parameters)
+    blacklight_config.facet_fields.select { |key, config| config.query }.each do |key, config|
+      solr_parameters[:"facet.field"].delete(key) if solr_parameters[:"facet.field"] 
 
       solr_parameters[:"facet.query"] ||= []
-      config.each do |label, query|
+      
+      config.query.each do |label, query|
         solr_parameters[:"facet.query"] << query
       end
     end
   end
-
-    def facet_query_config(solr_field)
-      config = blacklight_query_config[solr_field] || false
-      config = {} if config == true
-      config
-    end
-
-    def blacklight_query_config
-      Blacklight.config[:facet][:query] || {}
-    end
 end

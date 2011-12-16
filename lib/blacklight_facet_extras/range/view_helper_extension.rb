@@ -1,13 +1,10 @@
 module BlacklightFacetExtras::Range::ViewHelperExtension
 
-    def render_facet_limit(solr_field)
-      config = facet_range_config(solr_field)
-      if ( config )
-        render(:partial => "catalog/_facet_partials/range", :locals=> {:solr_field => solr_field })
-      else
-        super(solr_field)
-      end
-    end
+  def facet_partial_name(display_facet = nil)
+    return "catalog/_facet_partials/range" if blacklight_config.facet_fields[display_facet.name].rangex
+    super 
+  end
+
     def solr_range_to_a(solr_field)
       config = facet_range_config(solr_field)
       return RSolr::Ext::Response::Facets::FacetField.new(solr_field,[]) unless config and @response and @response["facet_counts"] and @response["facet_counts"]["facet_ranges"] and @response["facet_counts"]["facet_ranges"][solr_field]
