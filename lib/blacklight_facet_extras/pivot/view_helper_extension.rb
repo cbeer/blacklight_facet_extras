@@ -4,7 +4,6 @@ module BlacklightFacetExtras::Pivot::ViewHelperExtension
     super 
   end
 
-
   # Get a FacetField object from the @response
   def facet_by_field_name solr_field
     case solr_field
@@ -40,6 +39,19 @@ module BlacklightFacetExtras::Pivot::ViewHelperExtension
       parent = parent.try(:field).try(:parent)
     end
 
-    p
+    new_params = p
+
+        new_params.delete(:page)
+
+    # Delete any request params from facet-specific action, needed
+    # to redir to index action properly. 
+    Blacklight::Solr::FacetPaginator.request_keys.values.each do |paginator_key| 
+      new_params.delete(paginator_key)
+    end
+    new_params.delete(:id)
+
+    # Force action to be index. 
+    new_params[:action] = "index"
+    new_params  
   end
 end
