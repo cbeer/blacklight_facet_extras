@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe 'Blacklight facet extras / hierarchy' do
   use_vcr_cassette "solr_hierarchy"
-  before do
+  before(:each) do
     CatalogController.send(:include, BlacklightFacetExtras::Hierarchy::ControllerExtension)
+    CatalogController.blacklight_config = Blacklight::Configuration.new
     CatalogController.configure_blacklight do |config|
       config.index.show_link = 'title_display'
       config.default_solr_params = {
