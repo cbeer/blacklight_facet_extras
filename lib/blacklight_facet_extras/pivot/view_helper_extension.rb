@@ -4,6 +4,19 @@ module BlacklightFacetExtras::Pivot::ViewHelperExtension
     super 
   end
 
+
+  # Get a FacetField object from the @response
+  def facet_by_field_name solr_field
+    case solr_field
+      when String, Symbol
+        @response.pivot_facets.select { |x| x.name == solr_field }.first
+      when Blacklight::Configuration::FacetField
+        @response.pivot_facets.select { |x| x.name == solr_field.field }.first
+      else
+        super 
+    end
+  end
+
   def render_facet_value(facet_solr_field, item, options = {})
     if item.field.respond_to? :parent
       return (link_to_unless(options[:suppress_link], item.value, add_pivot_facet_params_and_redirect(item), :class=>"facet_select label") + " " + render_facet_count(item.hits)).html_safe

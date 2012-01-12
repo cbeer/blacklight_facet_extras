@@ -23,18 +23,14 @@ module BlacklightFacetExtras::Pivot::ControllerExtension
   end
 
   module ::RSolr::Ext::Response::Facets
-    alias_method :facets_without_pivot, :facets
-
-    def facets #_with_pivot
+    def pivot_facets #_with_pivot
       @facets_with_pivot ||= (
-        facets_without_pivot + 
         facet_counts['facet_pivot'].map do |(facet_pivot_name, values_and_hits)|
           field = pivot_field_from_facet_field(values_and_hits)
           PivotFacetField.new facet_pivot_name, field
         end
       )
     end
-    #alias_method :facets, :facets_with_pivot
 
     def pivot_field_from_facet_field facet_field, parent_item = nil
       items = []
