@@ -1,50 +1,32 @@
 module BlacklightFacetExtras::Pivot::ViewHelperExtension
-
   def facet_partial_name(display_facet = nil)
-    return "catalog/_facet_partials/pivot" if blacklight_config.facet_fields[display_facet.name].pivot
+    return "catalog/_facet_partials/pivot" if display_facet.is_a? RSolr::Ext::Response::Facets::PivotFacetField
     super 
   end
 
-    def solr_pivot_to_a(solr_field)
-      config = facet_pivot_config(solr_field)
-      return RSolr::Ext::Response::Facets::FacetField.new(solr_field, []) unless config and @response and @response["facet_counts"] and @response["facet_counts"]["facet_pivot"] and @response["facet_counts"]["facet_pivot"]
-
-      arr = []
-      pivot_field = config.join(",")
-
-      data = @response["facet_counts"]["facet_pivot"][pivot_field]
-      return RSolr::Ext::Response::Facets::FacetField.new(solr_field, []) unless data
-
-      data.each do |parent|
-        item = BlacklightFacetExtras::Pivot::FacetItem.new(parent['value'], parent['count'], :field => solr_field)
-
-        item.facets ||= []
-        parent['pivot'].each do |child|
-          label = child['value'].split(" / ").last
-
-
-          item.facets << BlacklightFacetExtras::Pivot::FacetItem.new(child['value'], child['count'], :display_label => label, :field => child['field'], :parent => item)
-        end
-
-
-        arr << item
-      end
-
-      RSolr::Ext::Response::Facets::FacetField.new(solr_field, arr)
+  def render_facet_value(facet_solr_field, item, options = {})
+    if item.field.respond_to? :parent
+      return (link_to_unless(options[:suppress_link], item.value, add_pivot_facet_params_and_redirect(item), :class=>"facet_select label") + " " + render_facet_count(item.hits)).html_safe
     end
 
-    def render_facet_value(facet_solr_field, item, options ={})
-      if item.is_a? BlacklightFacetExtras::Pivot::FacetItem
-        p = add_facet_params_and_redirect(item.field || facet_solr_field, item.value)
+    super
+  end
 
-        if item.parent
-          p[:f][item.parent.field] ||= []
-          p[:f][item.parent.field].push(item.parent.value)
-        end
+  def add_pivot_facet_params_and_redirect item
+    p = params.dup
+    p[:f] = (p[:f] || {}).dup # the command above is not deep in rails3, !@#$!@#$
+    p[:f][item.field.name] = (p[:f][item.field.name] || []).dup
+    p[:f][item.field.name].push(item.value)
 
-        (link_to_unless(options[:suppress_link], item.display_label || item.value , p, :class=>"facet_select label") + " " + render_facet_count(item.hits)).html_safe
-      else
-        super(facet_solr_field, item, options ={})
-      end
+
+    parent = item.try(:field).try(:parent)
+    while parent
+      p[:f][parent.field.name] = (p[:f][parent.field.name] || []).dup
+      p[:f][parent.field.name].push(parent.value)
+
+      parent = parent.try(:field).try(:parent)
     end
+
+    p
+  end
 end
