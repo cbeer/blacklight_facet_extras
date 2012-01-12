@@ -1,0 +1,216 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://127.0.0.1:8983/solr/select?wt=ruby&rows=10
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - text/plain; charset=utf-8
+      server:
+      - Jetty(6.1.3)
+    body: ! '{''responseHeader''=>{''status''=>0,''QTime''=>31,''params''=>{''wt''=>''ruby'',''hl''=>''true'',''rows''=>''20''}},''response''=>{''numFound''=>30,''start''=>0,''maxScore''=>1.0,''docs''=>[{''author_display''=>''Ayaz,
+      Shaikh, 1923-1997'',''format''=>''Book'',''title_display''=>''Fikr-i Ayāz'',''id''=>''00282214'',''published_display''=>[''Karācī''],''lc_callnum_display''=>[''PK2788.9.A9
+      F55 1998''],''pub_date''=>[''1998''],''language_facet''=>[''Urdu''],''material_type_display''=>[''375
+      p.''],''score''=>1.0},{''author_display''=>''Ayaz, Shaikh, 1923-1997'',''format''=>''Book'',''title_display''=>''Sāhivāl
+      jail kī ḍāʼirī'',''id''=>''00282371'',''published_display''=>[''Karācī''],''lc_callnum_display''=>[''MLCME
+      2002/02660 (D)''],''pub_date''=>[''1986''],''language_facet''=>[''Urdu''],''material_type_display''=>[''232
+      p.''],''score''=>1.0},{''subtitle_display''=>''guft va gū-yi Akbar Ganjī bā
+      ʻAbd Allāh Nūrī : bih payvast-i matn-i istīz̤āḥ-i ʻAbd Allāh Nūrī dar
+      Majlis-i panjum'',''author_vern_display''=>''‏نورى، عبد الله'',''title_display''=>''Naqdī
+      barā-yi tamām-i fuṣūl'',''id''=>''00313831'',''author_display''=>''Nūrī,
+      ʻAbd Allāh, 1949-'',''title_vern_display''=>''‏نقدى براى تمام فصول :‏'',''format''=>''Book'',''subtitle_vern_display''=>''‏گفت
+      و گوى اکبر گنجى با عبد الله نورى : به پيوست  متن استيضاح عبد الله نورى در مجلس
+      پنجم'',''isbn_t''=>[''9645625963''],''published_display''=>[''Tihrān''],''lc_callnum_display''=>[''DS318.84.N87
+      N87 2000''],''subject_geo_facet''=>[''Iran''],''pub_date''=>[''2000''],''subject_topic_facet''=>[''Nūrī,
+      ʻAbd Allāh, 1949-'',''Iran. Vizārat-i Kishvar''],''published_vern_display''=>[''‏تهران
+      :‏''],''language_facet''=>[''Persian''],''material_type_display''=>[''245 p.''],''subject_era_facet''=>[''1997-''],''score''=>1.0},{''author_display''=>''Yoshida,
+      Hajime, 1934-'',''title_vern_display''=>''久保栄 「火山灰地」 を読む'',''format''=>''Book'',''author_vern_display''=>''吉田一,
+      1934-'',''title_display''=>''Kubo Sakae "Kazanbaichi" o yomu'',''id''=>''00314247'',''published_display''=>[''Tōkyō''],''subject_geo_facet''=>[''Japan''],''subject_topic_facet''=>[''Kubo,
+      Sakae, 1901-1958'',''Japanese drama'',''Political plays, Japanese'',''Theater''],''pub_date''=>[''1997''],''published_vern_display''=>[''東京''],''language_facet''=>[''Japanese''],''material_type_display''=>[''480
+      p.''],''subject_era_facet''=>[''20th century''],''score''=>1.0},{''author_display''=>''Vi︠a︡tkin,
+      M. P. (Mikhail Porfirʹevich), 1895-1967'',''format''=>''Book'',''title_display''=>''Ocherki
+      po istorii Kazakhskoĭ SSR'',''id''=>''43037890'',''published_display''=>[''Moskva''],''lc_callnum_display''=>[''DK861.K3
+      V5''],''subject_geo_facet''=>[''Kazakhstan''],''pub_date''=>[''1941''],''language_facet''=>[''Russian''],''material_type_display''=>[''v.''],''score''=>1.0},{''author_display''=>''Korea
+      (North)'',''format''=>''Book'',''title_display''=>''Konstitut︠s︡ii︠a︡ i osnovnye
+      zakonodatelʹnye akty Koreĭskoĭ Narodno-Demokraticheskoĭ Respubliki'',''id''=>''53029833'',''published_display''=>[''Moskva''],''lc_callnum_display''=>[''KPC13
+      1952''],''pub_date''=>[''1952''],''language_facet''=>[''Russian''],''material_type_display''=>[''396
+      p.''],''score''=>1.0},{''title_display''=>''Koryŏ inmul yŏlchŏn'',''id''=>''77826928'',''title_vern_display''=>''高麗
+      人物 列傅'',''format''=>''Book'',''published_display''=>[''Sŏul''],''lc_callnum_display''=>[''DS912.38
+      .K982 1976''],''subject_geo_facet''=>[''Korea''],''pub_date''=>[''1976''],''published_vern_display''=>[''서울''],''language_facet''=>[''Korean''],''material_type_display''=>[''255
+      p.''],''subject_era_facet''=>[''Koryŏ period, 935-1392''],''score''=>1.0},{''author_display''=>''Parikshit
+      Sharma, Ogeti, 1930-'',''format''=>''Book'',''title_display''=>''Yaśodharā-mahākāvyam'',''id''=>''78908283'',''published_display''=>[''Puṇyapattanam'',''Haidrābāda''],''lc_callnum_display''=>[''PK3799.P29
+      Y3''],''subject_topic_facet''=>[''Gautama Buddha'',''Yaśodharā (Wife of Gautama
+      Buddha)''],''pub_date''=>[''1976''],''language_facet''=>[''Sanskrit''],''material_type_display''=>[''24,
+      128, 2 p.''],''score''=>1.0},{''author_display''=>''Iṣlāḥī, Amīn Aḥsan,
+      1904-1997'',''format''=>''Book'',''title_display''=>''Pākistānī ʻaurat dorāhe
+      par'',''id''=>''79930185'',''published_display''=>[''Lāhaur''],''lc_callnum_display''=>[''HQ1745.5
+      .I83 1978''],''subject_geo_facet''=>[''Pakistan''],''subject_topic_facet''=>[''Women''],''pub_date''=>[''1978''],''language_facet''=>[''Urdu''],''material_type_display''=>[''8,
+      174 p.''],''score''=>1.0},{''author_display''=>''Nārāyaṇapaṇḍita, 17th
+      cent'',''format''=>''Book'',''title_display''=>''Āśleṣāśataka of Nārāyaṇa
+      Paṇḍita'',''id''=>''85910001'',''published_display''=>[''Trivandrum''],''lc_callnum_display''=>[''Microfiche
+      90/61328 (P)''],''pub_date''=>[''1946''],''language_facet''=>[''Sanskrit''],''material_type_display''=>[''xii,
+      24 p.''],''score''=>1.0},{''subtitle_display''=>''sipurim mafliʼim ha-mevusasim
+      ʻal ʻuvdot hisṭoriyot'',''author_vern_display''=>''‏פינקל, חיים יעקב'',''title_display''=>''Shodede-yam
+      Yehudiyim'',''id''=>''86207417'',''author_display''=>''Finkel, Chaim Jacob'',''title_vern_display''=>''‏שודדי־ים
+      יהודיים :‏'',''format''=>''Book'',''subtitle_vern_display''=>''‏ספורים מפליאים
+      המבוססים על עובדות היסטוריות /‏'',''isbn_t''=>[''9650101373''],''published_display''=>[''Yerushalayim''],''lc_callnum_display''=>[''G535
+      .F54 1984''],''pub_date''=>[''1984''],''subject_topic_facet''=>[''Jewish pirates'',''Jewish
+      criminals''],''published_vern_display''=>[''‏ירושלים :‏''],''language_facet''=>[''Hebrew''],''material_type_display''=>[''283
+      p.''],''score''=>1.0},{''author_vern_display''=>''‏موحد ابطحى، خجة'',''title_display''=>''Āshnāʼī
+      bā ḥawzahʹhā-yi ʻilmīyah-ʼi Shīʻah dar ṭūl-i tārīkh'',''id''=>''87931798'',''author_display''=>''Muvaḥḥid
+      Abṭaḥī, Ḥujjat'',''title_vern_display''=>''‏اشنائى با حوزه‌هاى علميۀ شيعه
+      در طول تاريخ /‏'',''format''=>''Book'',''published_display''=>[''Iṣfahān''],''lc_callnum_display''=>[''BP44
+      .M88 1986''],''subject_geo_facet''=>[''Islamic countries''],''pub_date''=>[''1986''],''subject_topic_facet''=>[''Religious
+      institutions'',''Shiites'',''Islamic universities and colleges''],''published_vern_display''=>[''‏اصفهان
+      :‏''],''language_facet''=>[''Persian''],''material_type_display''=>[''v. <1>''],''score''=>1.0},{''author_display''=>''Lomtʻatʻiże,
+      Čola, 1879-1915'',''subtitle_display''=>''tʻeoriul-metʻoduri narkvevi'',''format''=>''Book'',''title_display''=>''Mrecvelobis
+      mušakis cʻxovrebis cesi'',''id''=>''90142413'',''published_display''=>[''Tʻbilisi''],''lc_callnum_display''=>[''MLCSN
+      96/3906 (H)''],''subject_topic_facet''=>[''Industrial workers; life style''],''pub_date''=>[''1975''],''language_facet''=>[''Georgian''],''material_type_display''=>[''65
+      p.''],''score''=>1.0},{''title_display''=>''Pukhan pŏmnyŏngjip'',''id''=>''92117465'',''title_vern_display''=>''北韓　法令集　／'',''author_display''=>''Korea
+      (North)'',''format''=>''Book'',''published_display''=>[''Sŏul Tʻŭkpyŏlsi''],''lc_callnum_display''=>[''KPC13
+      .K67 1990''],''subject_geo_facet''=>[''Korea (North)''],''pub_date''=>[''1990''],''subject_topic_facet''=>[''Law''],''published_vern_display''=>[''서울　持別市　：''],''language_facet''=>[''Korean''],''material_type_display''=>[''5
+      v.''],''score''=>1.0},{''subtitle_display''=>''ṿe-hu perush yafeh u-menupeh
+      ʻal Shulḥan ʻarukh Oraḥ ḥayim asher ḥiber Yosef Ḳaro ... ʻim ḥidushe dinim
+      she-hishmiṭ ha-gaʼon ... ṿe-himtsiʼam ... Mosheh Iserlish'',''author_vern_display''=>''‏ישראל
+      מאיר,‏ ‏הכהן'',''title_display''=>''Sefer Mishnah berurah'',''id''=>''92828023'',''author_display''=>''Israel
+      Meir, ha-Kohen, 1838-1933'',''title_vern_display''=>''‏ספר משנה ברורה :‏'',''format''=>''Book'',''subtitle_vern_display''=>''‏והוא
+      פירוש יפה ומנפה על שלחן ערוך ארח חיים אשר חבר יוסף קארו ... עם חידושי דינים
+      שהשמיט הגאון ... והמציאם משה איסרליש /‏'',''published_display''=>[''Jerusalem?''],''lc_callnum_display''=>[''BM520.88.A53
+      I88 1992b''],''pub_date''=>[''1992''],''subject_topic_facet''=>[''Karo, Joseph
+      ben Ephraim, 1488-1575'',''Jewish law'',''Judaism''],''published_vern_display''=>[''‏[Jerusalem?
+      :‏''],''language_facet''=>[''Hebrew''],''material_type_display''=>[''v. <1-5>''],''score''=>1.0},{''subtitle_display''=>''kangnam
+      yŏin kwa sin pʻalbulchʻul : Kim Hong-sin setʻae rŭpʻo'',''author_vern_display''=>''김　홍신,
+      1947-'',''title_display''=>''Ajikto kŭrŏk chŏrŏk sasimnikka'',''id''=>''94120425'',''author_display''=>''Kim,
+      Hong-sin, 1947-'',''title_vern_display''=>''아직도　그럭　저럭　사십니까'',''format''=>''Book'',''subtitle_vern_display''=>''강남　여인　과　신　팔불출
+      : 金　洪信　세태　르포'',''published_display''=>[''Sŏul''],''lc_callnum_display''=>[''HQ1765.5
+      .K46 1990''],''subject_geo_facet''=>[''Seoul (Korea)'',''Korea (South)''],''pub_date''=>[''1990''],''subject_topic_facet''=>[''Women''],''published_vern_display''=>[''서울''],''language_facet''=>[''Korean''],''material_type_display''=>[''289
+      p.''],''score''=>1.0},{''subtitle_display''=>''dar khiradvarzī-i siyāsī va
+      huvīyat-i mā Īrānīyān'',''author_vern_display''=>''‏رجايى، فرهنگ .'',''title_display''=>''Maʻrakah-ʼi
+      jahānʹbīnīʹhā'',''id''=>''96933325'',''author_display''=>''Rajāyī, Farhang,
+      1952 or 3-'',''title_vern_display''=>''‏معركۀ جهان‌بينىها :‏'',''format''=>''Book'',''subtitle_vern_display''=>''‏در
+      خردورزى سياسى و هويت ما ايرانيان /‏'',''published_display''=>[''Tihrān''],''lc_callnum_display''=>[''DS274
+      .R327 1994''],''subject_geo_facet''=>[''Iran''],''pub_date''=>[''1994''],''subject_topic_facet''=>[''Political
+      science'',''Iranians''],''published_vern_display''=>[''‏تهران :‏''],''language_facet''=>[''Persian''],''material_type_display''=>[''323
+      p.''],''score''=>1.0},{''author_display''=>''Nārāyaṇa Paṇḍitācārya, 13th
+      cent'',''format''=>''Book'',''title_display''=>''Sumadhvavijayaḥ'',''id''=>''2001417245'',''published_display''=>[''Bangalore''],''lc_callnum_display''=>[''PK3798.N313
+      S87 2000''],''subject_topic_facet''=>[''Madhva, 13th cent''],''pub_date''=>[''2000''],''language_facet''=>[''Sanskrit''],''material_type_display''=>[''v.
+      <1   >''],''score''=>1.0},{''author_vern_display''=>''ولد مولاي الزين، سيد محمد
+      ولد سيد'',''title_display''=>''al-Ḥarb fī al-alfīyah al-thālithah'',''id''=>''2003546302'',''author_display''=>''Wuld
+      Mawlāy al-Zayn, Sayyid Muḥammad wuld Sayyid'',''title_vern_display''=>''الحرب
+      في الألفية الثالثة'',''format''=>''Book'',''published_display''=>[''Nuwākshūṭ''],''lc_callnum_display''=>[''U21.2
+      .W85 2003''],''pub_date''=>[''2003''],''subject_topic_facet''=>[''War'',''Military
+      art and science'',''Warfare, Conventional'',''Military weapons''],''published_vern_display''=>[''نواكشوط''],''language_facet''=>[''Arabic''],''material_type_display''=>[''128
+      p.''],''subject_era_facet''=>[''21st century''],''score''=>1.0},{''author_display''=>''Bstan-ʼdzin-mkhas-grub,
+      1967-'',''format''=>''Book'',''title_display''=>''Bon-brgyaʼi lo rgyus lugs
+      gñis gsal baʼi me loṅ źes bya ba bźugs so'',''id''=>''2004310986'',''published_display''=>[''Lha-sa''],''lc_callnum_display''=>[''DS797.82.B663
+      B75 2004''],''subject_geo_facet''=>[''Bon-brgya (China)''],''pub_date''=>[''2004''],''language_facet''=>[''Tibetan''],''material_type_display''=>[''149
+      p.''],''score''=>1.0}]},''facet_counts''=>{''facet_queries''=>{},''facet_fields''=>{''format''=>[''Book'',30],''lc_1letter_facet''=>[''B
+      - Philosophy, Psychology, Religion'',6,''D - World History'',6,''H - Social
+      Sciences'',4,''P - Language & Literature'',4,''M - Music'',3,''K - Law'',2,''E
+      - History of the Americas (General)'',1,''G - Geography, Anthropology, Recreation'',1,''U
+      - Military Science'',1],''lc_alpha_facet''=>[''DS'',5,''BQ'',3,''PK'',3,''BP'',2,''HQ'',2,''KPC'',2,''BM'',1,''DK'',1,''E'',1,''G'',1],''lc_b4cutter_facet''=>[''KPC13'',2,''BM520.88.A53'',1,''BP161.3'',1,''BP44'',1,''BQ4036'',1,''BQ5593.P3'',1,''BQ7684.4'',1,''DK861.K3'',1,''DS274'',1,''DS318.84.N87'',1],''language_facet''=>[''Tibetan'',6,''Hebrew'',3,''Korean'',3,''Persian'',3,''Sanskrit'',3,''Urdu'',3,''Arabic'',2,''English'',2,''Japanese'',2,''Russian'',2],''pub_date''=>[''2008'',4,''1976'',2,''1986'',2,''1990'',2,''1997'',2,''2000'',2,''1941'',1,''1946'',1,''1952'',1,''1962'',1],''subject_era_facet''=>[''20th
+      century'',3,''1997-'',2,''21st century'',2,''1990-'',1,''2005-2015'',1,''Koryŏ
+      period, 935-1392'',1],''subject_geo_facet''=>[''India'',2,''Iran'',2,''Japan'',2,''Bon-brgya
+      (China)'',1,''Bridgeton'',1,''China'',1,''Economic history'',1,''Hong Kong (China)'',1,''Islamic
+      countries'',1,''Israel'',1],''subject_topic_facet''=>[''Japanese drama'',2,''Kubo,
+      Sakae, 1901-1958'',2,''Political plays, Japanese'',2,''Theater'',2,''Women'',2,''Accident
+      insurance'',1,''Buddhism'',1,''Delaware Indians'',1,''Delaware women'',1,''Education
+      and state'',1]},''facet_dates''=>{},''facet_ranges''=>{}},''highlighting''=>{''00282214''=>{},''00282371''=>{},''00313831''=>{},''00314247''=>{},''43037890''=>{},''53029833''=>{},''77826928''=>{},''78908283''=>{},''79930185''=>{},''85910001''=>{},''86207417''=>{},''87931798''=>{},''90142413''=>{},''92117465''=>{},''92828023''=>{},''94120425''=>{},''96933325''=>{},''2001417245''=>{},''2003546302''=>{},''2004310986''=>{}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://127.0.0.1:8983/solr/select?wt=ruby&rows=10&facet.query=%7B%21key%3Dlabel%7Dvalue%3A1&facet.query=%7B%21key%3Dlabel2%7Dvalue%3A2
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - text/plain; charset=utf-8
+      server:
+      - Jetty(6.1.3)
+    body: |
+      {
+        'responseHeader'=>{
+          'status'=>0,
+            'QTime'=>10,
+            'params'=>{
+              'indent'=>'true',
+              'wt'=>'ruby',
+              'rows' => 10,
+              'q'=>'ipsum lorem'}},
+          'response'=>{'numFound'=>8,'start'=>0,'maxScore'=>1.0,'docs'=>[
+            { 'id' => 'a', 'title_display' => 'a'},
+            { 'id' => 'b', 'title_display' => 'b'},
+            { 'id' => 'c', 'title_display' => 'c'},
+            { 'id' => 'd', 'title_display' => 'd'},
+            { 'id' => 'e', 'title_display' => 'e'},
+            { 'id' => 'f', 'title_display' => 'f'},
+            { 'id' => 'g', 'title_display' => 'g'},
+            { 'id' => 'h', 'title_display' => 'h'}
+          ]
+          },
+          'facet_counts'=>{
+            'facet_queries'=>{ 'label' => 5, 'label2' => 3},
+            'facet_fields'=>{},
+            'facet_dates'=>{},
+            'facet_ranges'=>{}},
+          'spellcheck'=>{
+            'suggestions'=>[
+              ]
+          },
+      }
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://127.0.0.1:8983/solr/select?wt=ruby&fq=value%3A1&rows=10&facet.query=%7B%21key%3Dlabel%7Dvalue%3A1&facet.query=%7B%21key%3Dlabel2%7Dvalue%3A2
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - text/plain; charset=utf-8
+      server:
+      - Jetty(6.1.3)
+    body: |
+      {
+        'responseHeader'=>{
+          'status'=>0,
+            'QTime'=>10,
+            'params'=>{
+              'indent'=>'true',
+              'wt'=>'ruby',
+              'rows' => 10,
+              'q'=>'ipsum lorem'}},
+          'response'=>{'numFound'=>5,'start'=>0,'maxScore'=>1.0,'docs'=>[
+            { 'id' => 'a', 'title_display' => 'a'},
+            { 'id' => 'b', 'title_display' => 'b'},
+            { 'id' => 'c', 'title_display' => 'c'},
+            { 'id' => 'd', 'title_display' => 'd'},
+            { 'id' => 'e', 'title_display' => 'e'},
+          ]
+          },
+          'facet_counts'=>{
+            'facet_queries'=>{ 'label' => 5, 'label2' => 0},
+            'facet_fields'=>{},
+            'facet_dates'=>{},
+            'facet_ranges'=>{}},
+          'spellcheck'=>{
+            'suggestions'=>[
+              ]
+          },
+      }
+    http_version: '1.1'
