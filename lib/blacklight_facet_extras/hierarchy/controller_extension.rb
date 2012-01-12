@@ -4,7 +4,7 @@
 module BlacklightFacetExtras::Hierarchy::ControllerExtension
   def self.included(some_class)
     some_class.send :include,BlacklightFacetExtras::ControllerExtension
-    some_class.solr_search_params_logic << :add_hierarchy_facets_to_solr
+    some_class.solr_search_params_logic << :add_hierarchy_facets_to_solr unless some_class.solr_search_params_logic.include? :add_hierarchy_facets_to_solr
     some_class.helper BlacklightFacetExtras::Hierarchy::ViewHelperExtension
   end
   def facet_value_to_fq_string(facet_field, value)
