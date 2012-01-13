@@ -5,8 +5,7 @@
 module BlacklightFacetExtras::Tag::ControllerExtension
   def self.included(some_class)
     some_class.send :include,BlacklightFacetExtras::ControllerExtension
-    some_class.solr_search_params_logic << :add_tag_facets_to_solr
-    some_class.helper_method :facet_tag_config
+    some_class.solr_search_params_logic << :add_tag_facets_to_solr unless some_class.solr_search_params_logic.include? :add_tag_facets_to_solr
     some_class.helper BlacklightFacetExtras::Tag::ViewHelperExtension
   end
 
