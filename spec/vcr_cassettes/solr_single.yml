@@ -1,0 +1,135 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://127.0.0.1:8983/solr/select?wt=ruby&facet.field=%7B%21ex%3Dfacet%7Dfacet&rows=10
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - text/plain; charset=utf-8
+      server:
+      - Jetty(6.1.3)
+    body: |
+      {
+        'responseHeader'=>{
+          'status'=>0,
+            'QTime'=>10,
+            'params'=>{
+              'indent'=>'true',
+              'wt'=>'ruby',
+              'rows' => 10,
+              'q'=>'ipsum lorem'}},
+          'response'=>{'numFound'=>8,'start'=>0,'maxScore'=>1.0,'docs'=>[
+            { 'id' => 'a', 'title_display' => 'a'},
+            { 'id' => 'b', 'title_display' => 'b'},
+            { 'id' => 'c', 'title_display' => 'c'},
+            { 'id' => 'd', 'title_display' => 'd'},
+            { 'id' => 'e', 'title_display' => 'e'},
+            { 'id' => 'f', 'title_display' => 'f'},
+            { 'id' => 'g', 'title_display' => 'g'},
+            { 'id' => 'h', 'title_display' => 'h'}
+          ]
+          },
+          'facet_counts'=>{
+            'facet_queries'=>{},
+            'facet_fields'=>{ 'facet' => ['label', 5, 'label2', 3]},
+            'facet_dates'=>{},
+            'facet_ranges'=>{}},
+          'spellcheck'=>{
+            'suggestions'=>[
+              ]
+          },
+      }
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://127.0.0.1:8983/solr/select?wt=ruby&fq=%7B%21tag%3Dfacet%7D+_query_%3A%22%7B%21raw+f%3Dfacet%7Dlabel%22&facet.field=%7B%21ex%3Dfacet%7Dfacet&rows=10
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - text/plain; charset=utf-8
+      server:
+      - Jetty(6.1.3)
+    body: |
+      {
+        'responseHeader'=>{
+          'status'=>0,
+            'QTime'=>10,
+            'params'=>{
+              'indent'=>'true',
+              'wt'=>'ruby',
+              'rows' => 10,
+              'q'=>'ipsum lorem'}},
+          'response'=>{'numFound'=>5,'start'=>0,'maxScore'=>1.0,'docs'=>[
+            { 'id' => 'a', 'title_display' => 'a'},
+            { 'id' => 'b', 'title_display' => 'b'},
+            { 'id' => 'c', 'title_display' => 'c'},
+            { 'id' => 'd', 'title_display' => 'd'},
+            { 'id' => 'e', 'title_display' => 'e'},
+          ]
+          },
+          'facet_counts'=>{
+            'facet_queries'=>{},
+            'facet_fields'=>{ 'facet' => ['label', 5, 'label2', 3]},
+            'facet_dates'=>{},
+            'facet_ranges'=>{}},
+          'spellcheck'=>{
+            'suggestions'=>[
+              ]
+          },
+      }
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://127.0.0.1:8983/solr/select?wt=ruby&fq=%7B%21tag%3Dfacet%7D+_query_%3A%22%7B%21raw+f%3Dfacet%7Dlabel2%22&facet.field=%7B%21ex%3Dfacet%7Dfacet&rows=10
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - text/plain; charset=utf-8
+      server:
+      - Jetty(6.1.3)
+    body: |
+      {
+        'responseHeader'=>{
+          'status'=>0,
+            'QTime'=>10,
+            'params'=>{
+              'indent'=>'true',
+              'wt'=>'ruby',
+              'rows' => 10,
+              'q'=>'ipsum lorem'}},
+          'response'=>{'numFound'=>5,'start'=>0,'maxScore'=>1.0,'docs'=>[
+            { 'id' => 'f', 'title_display' => 'f'},
+            { 'id' => 'g', 'title_display' => 'g'},
+            { 'id' => 'h', 'title_display' => 'h'},
+          ]
+          },
+          'facet_counts'=>{
+            'facet_queries'=>{},
+            'facet_fields'=>{ 'facet' => ['label', 5, 'label2', 3]},
+            'facet_dates'=>{},
+            'facet_ranges'=>{}},
+          'spellcheck'=>{
+            'suggestions'=>[
+              ]
+          },
+      }
+    http_version: '1.1'
+

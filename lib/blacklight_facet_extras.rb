@@ -11,6 +11,7 @@ module BlacklightFacetExtras
   autoload :Query, 'blacklight_facet_extras/query'
   autoload :Tag, 'blacklight_facet_extras/tag'
   autoload :Multiple, 'blacklight_facet_extras/multiple'
+  autoload :Single, 'blacklight_facet_extras/single'
 
   require 'blacklight_facet_extras/version'
   require 'blacklight_facet_extras/engine'
