@@ -5,13 +5,12 @@ module BlacklightFacetExtras
   autoload :ViewHelperExtension, 'blacklight_facet_extras/view_helper_extension'
   autoload :RouteSets, 'blacklight_facet_extras/route_sets'
 
-  autoload :FacetItem, 'blacklight_facet_extras/facet_item'
-  autoload :Filter, 'blacklight_facet_extras/filter'
   autoload :Hierarchy, 'blacklight_facet_extras/hierarchy'
   autoload :Pivot, 'blacklight_facet_extras/pivot'
   autoload :Range, 'blacklight_facet_extras/range'
   autoload :Query, 'blacklight_facet_extras/query'
   autoload :Tag, 'blacklight_facet_extras/tag'
+  autoload :Multiple, 'blacklight_facet_extras/multiple'
 
   require 'blacklight_facet_extras/version'
   require 'blacklight_facet_extras/engine'
