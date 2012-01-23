@@ -1,6 +1,6 @@
 module BlacklightFacetExtras::Pivot::ViewHelperExtension
   def facet_partial_name(display_facet = nil)
-    return "catalog/_facet_partials/pivot" if display_facet.is_a? RSolr::Ext::Response::Facets::PivotFacetField
+    return "catalog/_facet_partials/pivot" if display_facet.is_a? RSolr::Ext::Response::Facets::PivotFacetField or display_facet.items.any? { |x| x.pivot }
     super 
   end
 
