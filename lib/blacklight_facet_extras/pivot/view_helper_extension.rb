@@ -8,12 +8,12 @@ module BlacklightFacetExtras::Pivot::ViewHelperExtension
   def facet_by_field_name solr_field
     case solr_field
       when String, Symbol
-        @response.pivot_facets.select { |x| x.name == solr_field }.first
+        field = @response.pivot_facets.select { |x| x.name == solr_field }.first
       when Blacklight::Configuration::FacetField
-        @response.pivot_facets.select { |x| x.name == solr_field.field }.first
-      else
-        super 
-    end
+        field = @response.pivot_facets.select { |x| x.name == solr_field.field }.first
+    end 
+
+    field || super
   end
 
   def render_facet_value(facet_solr_field, item, options = {})
