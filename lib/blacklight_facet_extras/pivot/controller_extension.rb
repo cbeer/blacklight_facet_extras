@@ -25,7 +25,7 @@ module BlacklightFacetExtras::Pivot::ControllerExtension
   module ::RSolr::Ext::Response::Facets
     def pivot_facets #_with_pivot
       @facets_with_pivot ||= (
-        facet_counts['facet_pivot'].map do |(facet_pivot_name, values_and_hits)|
+        (facet_counts['facet_pivot'] || []).map do |(facet_pivot_name, values_and_hits)|
           field = pivot_field_from_facet_field(values_and_hits)
           PivotFacetField.new facet_pivot_name, field
         end
