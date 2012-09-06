@@ -22,7 +22,7 @@ module BlacklightFacetExtras::Multiple::ControllerExtension
       f_request_params.each_pair do |facet_field, value_list|
         value_list ||= []
         value_list = [value_list] unless value_list.respond_to? :each
-        solr_parameters[:fq] << "{!tag=#{facet_field.parameterize}}#{value_list.map { |value| "_query_:\"#{facet_value_to_fq_string(facet_field, value).gsub('"', '\\"')}\"" }.join(" OR ")})"
+        solr_parameters[:fq] << "{!tag=#{facet_field.parameterize}}#{value_list.map { |value| "_query_:\"#{facet_value_to_fq_string(facet_field, value).gsub('"', '\\"')}\"" }.join(" OR ")}"
       end      
     end
   end
