@@ -49,7 +49,7 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: http://127.0.0.1:8983/solr/select?wt=ruby&fq=%7B%21tag%3Dfacet%7D_query_%3A%22%7B%21raw+f%3Dfacet%7Dlabel%22%29&facet.field=%7B%21ex%3Dfacet%7Dfacet&rows=10
+    uri: http://127.0.0.1:8983/solr/select?wt=ruby&fq=%7B%21tag%3Dfacet%7D_query_%3A%22%7B%21raw+f%3Dfacet%7Dlabel%22&facet.field=%7B%21ex%3Dfacet%7Dfacet&rows=10
     body: 
     headers: 
   response: !ruby/struct:VCR::Response
@@ -93,7 +93,7 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: http://127.0.0.1:8983/solr/select?wt=ruby&fq=%7B%21tag%3Dfacet%7D_query_%3A%22%7B%21raw+f%3Dfacet%7Dlabel%22+OR+_query_%3A%22%7B%21raw+f%3Dfacet%7Dlabel2%22%29&facet.field=%7B%21ex%3Dfacet%7Dfacet&rows=10
+    uri: http://127.0.0.1:8983/solr/select?wt=ruby&fq=%7B%21tag%3Dfacet%7D_query_%3A%22%7B%21raw+f%3Dfacet%7Dlabel%22+OR+_query_%3A%22%7B%21raw+f%3Dfacet%7Dlabel2%22&facet.field=%7B%21ex%3Dfacet%7Dfacet&rows=10
     body: 
     headers: 
   response: !ruby/struct:VCR::Response
