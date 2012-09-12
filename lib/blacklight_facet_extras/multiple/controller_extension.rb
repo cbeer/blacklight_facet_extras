@@ -34,4 +34,15 @@ module BlacklightFacetExtras::Multiple::ControllerExtension
       solr_parameters[:"facet.field"][index] = "{!ex=#{field.parameterize}}#{field}"
     end   
   end
+
+
+  # Delete the f_inclusive attribute, so that when we do the facets page, we draw all the available facets, not just the selected ones.
+  # Alternate way of doing this would be to refactor blacklight core such that there is a configurable solr_facet_params_logic (similar to solr_search_params_logic)
+  def solr_facet_params(facet_field, user_params=params || {}, extra_controller_params={})
+    user_params = user_params.dup
+    user_params.delete('f_inclusive')
+    extra_controller_params = extra_controller_params.dup
+    extra_controller_params.delete('f_inclusive')
+    super(facet_field, user_params, extra_controller_params)
+  end
 end
